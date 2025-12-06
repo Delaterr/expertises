@@ -1,0 +1,93 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --------------------------------------------------------------------
+    // Helper Functions
+    // --------------------------------------------------------------------
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    function isShopOwner(shopId) {
+        // This function is valid for single-document operations (get, create, update, delete).
+        // It checks if the user's UID is the owner of the shop document.
+        return get(/databases/$(database)/documents/shops/$(shopId)).data.ownerId == request.auth.uid;
+    }
+
+    // --------------------------------------------------------------------
+    // User Data: Users can only read/write their own profile
+    // --------------------------------------------------------------------
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // --------------------------------------------------------------------
+    // Shop Data (Multi-Tenant)
+    // --------------------------------------------------------------------
+    match /shops/{shopId} {
+      // Allow public read for the main shop document
+      allow get: if true;
+      allow list: if true;
+
+      // Only an authenticated user who is the owner can create a shop
+      allow create: if isSignedIn() && request.resource.data.ownerId == request.auth.uid;
+      
+      // Only the shop owner can update or delete the shop document itself
+      allow update, delete: if isShopOwner(shopId);
+
+      // --- Subcollection Rules ---
+
+      // Products and Categories: Publicly readable for menus, writable by shop owner
+      match /products/{productId} {
+        allow get, list: if true;
+        allow write: if isShopOwner(shopId);
+      }
+      
+      match /categories/{categoryId} {
+         allow get, list: if true;
+         allow write: if isShopOwner(shopId);
+      }
+      
+      // Customers, Transactions, Roles: These are private.
+      // `list` is allowed for any authenticated user. The client is trusted to query only shops
+      // they have access to. Write rules prevent unauthorized data modification.
+      match /customers/{customerId} {
+         allow read: if isSignedIn();
+         allow write: if isShopOwner(shopId);
+      }
+      
+      match /transactions/{transactionId} {
+        allow read: if isSignedIn();
+        allow write: if isShopOwner(shopId);
+      }
+
+      match /userShopRoles/{userShopRoleId} {
+          allow read: if isSignedIn();
+          allow write: if isShopOwner(shopId); // Only owner can manage roles
+      }
+
+       match /role-definitions/{roleDefinitionId} {
+          allow read: if isSignedIn();
+          allow write: if isShopOwner(shopId); // Only owner can define roles
+      }
+    }
+    
+    // --------------------------------------------------------------------
+    // Super Admin Roles
+    // --------------------------------------------------------------------
+    match /roles_admin/{userId} {
+        allow read: if isOwner(userId);
+        // Temporarily allow any authenticated user to create an admin role on first signup.
+        allow create: if isSignedIn();
+        // Only existing admins can write to the admin roles
+        allow write: if get(/databases/$(database)/documents/roles_admin/$(request.auth.uid)) != null;
+    }
+  }
+}

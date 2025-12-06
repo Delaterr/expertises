@@ -1,0 +1,450 @@
+
+{
+  "entities": {
+    "Shop": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Shop",
+      "type": "object",
+      "description": "Represents a business or shop within the application.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Shop entity."
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "Reference to the User who owns the shop. (Relationship: User 1:N Shop)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the shop."
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of the shop."
+        },
+        "defaultCurrency": {
+          "type": "string",
+          "description": "Default currency used by the shop (e.g., USD, EUR)."
+        },
+        "menuUrl": {
+          "type": "string",
+          "description": "URL for the shop's public menu/catalog.",
+          "format": "uri"
+        },
+        "receiptTemplate": {
+          "type": "string",
+          "description": "The selected receipt template for the shop.",
+          "enum": ["template1", "template2", "template3", "template4"]
+        },
+        "printerIpAddress": {
+            "type": "string",
+            "description": "The IP address of the network receipt printer."
+        },
+        "printerPort": {
+            "type": "number",
+            "description": "The port number for the network receipt printer, usually 9100."
+        }
+      },
+      "required": [
+        "id",
+        "ownerId",
+        "name",
+        "address",
+        "defaultCurrency"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the application (e.g., shop owner, employee).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the User entity."
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User's first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User's last name."
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName"
+      ]
+    },
+    "Product": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Product",
+      "type": "object",
+      "description": "Represents a product sold by the shop.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Product entity."
+        },
+        "shopId": {
+          "type": "string",
+          "description": "Reference to the Shop that sells this product. (Relationship: Shop 1:N Product)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the product."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the product."
+        },
+        "salesPrice": {
+          "type": "number",
+          "description": "Price at which the product is sold."
+        },
+        "purchasePrice": {
+          "type": "number",
+          "description": "Price at which the product was purchased (optional)."
+        },
+        "initialQuantity": {
+          "type": "number",
+          "description": "Initial quantity of the product in stock."
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Reference to the Category this product belongs to. (Relationship: Category 1:N Product)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the product image (optional).",
+          "format": "uri"
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Barcode of the product (optional)."
+        },
+        "lowStockThreshold": {
+          "type": "number",
+          "description": "The quantity at which the product is considered low in stock."
+        }
+      },
+      "required": [
+        "id",
+        "shopId",
+        "name",
+        "description",
+        "salesPrice",
+        "initialQuantity",
+        "categoryId"
+      ]
+    },
+    "Category": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Category",
+      "type": "object",
+      "description": "Represents a category of products.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Category entity."
+        },
+        "shopId": {
+          "type": "string",
+          "description": "Reference to the Shop this category belongs to. (Relationship: Shop 1:N Category)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the category."
+        }
+      },
+      "required": [
+        "id",
+        "shopId",
+        "name"
+      ]
+    },
+    "Transaction": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Transaction",
+      "type": "object",
+      "description": "Represents a sales transaction.",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the Transaction entity." },
+        "shopId": { "type": "string", "description": "Reference to the Shop where the transaction occurred." },
+        "sellerId": { "type": "string", "description": "Reference to the User who made the sale." },
+        "transactionDate": { "type": "string", "description": "Date and time of the transaction.", "format": "date-time" },
+        "totalAmount": { "type": "number", "description": "Total amount of the transaction." },
+        "paymentMethod": { "type": "string", "description": "Method of payment used." },
+        "productIds": { "type": "array", "description": "References to the Products sold.", "items": { "type": "string" } },
+        "customerId": { "type": "string", "description": "Reference to the Customer for this transaction." },
+        "customerName": { "type": "string", "description": "Name of the customer at the time of transaction." },
+        "isDebt": { "type": "boolean", "description": "True if this transaction is a debt." },
+        "amountPaid": { "type": "number", "description": "The amount paid if it's a debt." },
+        "amountDue": { "type": "number", "description": "The remaining amount due if it's a debt." }
+      },
+      "required": [
+        "id",
+        "shopId",
+        "sellerId",
+        "transactionDate",
+        "totalAmount",
+        "paymentMethod",
+        "productIds"
+      ]
+    },
+    "StockAlert": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "StockAlert",
+      "type": "object",
+      "description": "Represents a low stock alert for a product.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the StockAlert entity."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Reference to the Product that triggered the alert. (Relationship: Product 1:N StockAlert)"
+        },
+        "alertThreshold": {
+          "type": "number",
+          "description": "The threshold at which the alert is triggered."
+        },
+        "currentStock": {
+          "type": "number",
+          "description": "Current stock level of the product."
+        },
+        "alertDate": {
+          "type": "string",
+          "description": "Date and time the alert was triggered.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "productId",
+        "alertThreshold",
+        "currentStock",
+        "alertDate"
+      ]
+    },
+    "UserRole": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserRole",
+      "type": "object",
+      "description": "Represents a role assigned to a user within a shop.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserRole entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User this role is assigned to. (Relationship: User 1:N UserRole)"
+        },
+        "shopId": {
+          "type": "string",
+          "description": "Reference to the Shop this role is within. (Relationship: Shop 1:N UserRole)"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role assigned to the user (e.g., Admin, Stock Manager, POS Seller)."
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "shopId",
+        "role"
+      ]
+    },
+    "Customer": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Customer",
+      "type": "object",
+      "description": "Represents a customer of a shop.",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier for the customer." },
+        "shopId": { "type": "string", "description": "The shop this customer belongs to." },
+        "name": { "type": "string", "description": "Customer's full name." },
+        "email": { "type": "string", "format": "email", "description": "Customer's email address." },
+        "phone": { "type": "string", "description": "Customer's phone number." },
+        "totalSpent": { "type": "number", "description": "Total amount spent by the customer." },
+        "lastSeen": { "type": "string", "format": "date-time", "description": "Last time the customer made a purchase." }
+      },
+      "required": ["id", "shopId", "name"]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles.  Uses path-based ownership for private user data.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/shops/{shopId}",
+        "definition": {
+          "entityName": "Shop",
+          "schema": {
+            "$ref": "#/backend/entities/Shop"
+          },
+          "description": "Stores shops owned by the user. Uses path-based ownership for clear access control. ownerId is duplicated in the shop document.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/shops/{shopId}/products/{productId}",
+        "definition": {
+          "entityName": "Product",
+          "schema": {
+            "$ref": "#/backend/entities/Product"
+          },
+          "description": "Stores products belonging to a shop. Access is controlled by roles defined in the UserRole collection.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            },
+            {
+              "name": "productId",
+              "description": "The unique identifier for the product."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/shops/{shopId}/categories/{categoryId}",
+        "definition": {
+          "entityName": "Category",
+          "schema": {
+            "$ref": "#/backend/entities/Category"
+          },
+          "description": "Stores product categories for each shop.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            },
+            {
+              "name": "categoryId",
+              "description": "The unique identifier for the category."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/shops/{shopId}/transactions/{transactionId}",
+        "definition": {
+          "entityName": "Transaction",
+          "schema": {
+            "$ref": "#/backend/entities/Transaction"
+          },
+          "description": "Stores transaction records for each shop.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            },
+            {
+              "name": "transactionId",
+              "description": "The unique identifier for the transaction."
+            }
+          ]
+        }
+      },
+       {
+        "path": "/shops/{shopId}/customers/{customerId}",
+        "definition": {
+          "entityName": "Customer",
+          "schema": {
+            "$ref": "#/backend/entities/Customer"
+          },
+          "description": "Stores customer information for each shop.",
+          "params": [
+            {
+              "name": "shopId",
+              "description": "The unique identifier for the shop."
+            },
+            {
+              "name": "customerId",
+              "description": "The unique identifier for the customer."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/products/{productId}/stock_alerts/{stockAlertId}",
+        "definition": {
+          "entityName": "StockAlert",
+          "schema": {
+            "$ref": "#/backend/entities/StockAlert"
+          },
+          "description": "Stores stock alerts for a specific product. This is a subcollection under the products collection.",
+          "params": [
+            {
+              "name": "productId",
+              "description": "The unique identifier for the product."
+            },
+            {
+              "name": "stockAlertId",
+              "description": "The unique identifier for the stock alert."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/user_roles/{userRoleId}",
+        "definition": {
+          "entityName": "UserRole",
+          "schema": {
+            "$ref": "#/backend/entities/UserRole"
+          },
+          "description": "Stores roles assigned to users within shops.  Used for authorization.  Queries to this collection determine a user's access level within a shop.",
+          "params": [
+            {
+              "name": "userRoleId",
+              "description": "The unique identifier for the UserRole entity."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support a multi-tenant POS and inventory management system (ShopFlow) using Flutter and Firebase. The structure prioritizes authorization independence, clarity, and scalability, aligning with the core design principles. Each shop operates independently, and roles are managed within the database (DBAC) using the UserRole entity. Authorization Independence is ensured via path-based ownership of data (e.g., `/users/{userId}/shops/{shopId}`) and the denormalization of shop-related data. Secure list operations (QAPs) are enabled by segregating data based on ownership and role, avoiding rules that filter data. The structure enforces invariants such as ownership, timestamps, and consistency through semantic naming and explicit state modeling.\n\n**Authorization Independence and Denormalization:** The system avoids hierarchical authorization dependencies by using path-based authorization and denormalizing relevant data. For example, Products are located at `/shops/{shopId}/products/{productId}`, and access control is managed based on the current user's role with respect to the shop (stored in `/user_roles/{userRoleId}`). Roles are associated with User-Shop pairs, avoiding `get()` calls in security rules and enabling atomic operations.\n\n**Structural Segregation:** The data is segregated based on ownership and role. User-owned data is placed under `/users/{userId}`, and shop-specific data is placed under `/shops/{shopId}`. This segregation ensures that documents in a collection share the same security requirements, simplifying the rules and improving security.\n\n**Access Modeling:** Consistent access modeling patterns are used:\n\n*   **Path-Based Ownership:** Shops are owned by users, and the ownership is represented by the path `/users/{userId}/shops/{shopId}`.\n*   **Membership Map:** Not directly used in this design, but roles and access are controlled by the `/user_roles/{userRoleId}` collection.\n*   **Global Roles (DBAC):** Roles are stored in the database within the `UserRole` collection, relying on existence rather than content for authorization.\n\n**QAPs (Rules are not Filters):** The structure enables secure list operations. Since data is segregated by ownership and roles, rules can grant or deny access to entire collections or documents based on the user's authentication status and roles. This prevents the need for rules that filter data, which can be inefficient and insecure.\n\n**Example Scenario**: When a user wants to access products for a specific shop, the rule checks if the user has the necessary role (Admin, Stock Manager, or POS Seller) for that shop by querying `/user_roles/{userRoleId}` where `userId` and `shopId` matches the request. This role-based check allows access to the product data without needing to perform additional `get()` calls or filter the data based on user-specific criteria."
+  }
+}

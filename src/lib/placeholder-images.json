@@ -1,0 +1,88 @@
+{
+  "placeholderImages": [
+    {
+      "id": "prod_espresso_machine",
+      "description": "A modern espresso machine.",
+      "imageUrl": "https://images.unsplash.com/photo-1616035596458-2338800a1ff2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlc3ByZXNzbyUyMG1hY2hpbmV8ZW58MHx8fHwxNzYzMTk5MDA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "espresso machine"
+    },
+    {
+      "id": "prod_coffee_beans",
+      "description": "A bag of artisanal coffee beans.",
+      "imageUrl": "https://images.unsplash.com/photo-1675306408031-a9aad9f23308?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBiZWFuc3xlbnwwfHx8fDE3NjMyNjU3Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coffee beans"
+    },
+    {
+      "id": "prod_croissant",
+      "description": "A freshly baked croissant.",
+      "imageUrl": "https://images.unsplash.com/photo-1606758184328-faab9a86f4d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjcm9pc3NhbnQlMjBwYXN0cnl8ZW58MHx8fHwxNzYzMTk2MTI4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "croissant pastry"
+    },
+    {
+      "id": "prod_iced_latte",
+      "description": "A refreshing iced latte in a tall glass.",
+      "imageUrl": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxpY2VkJTIwY29mZmVlfGVufDB8fHx8MTc2MzE5OTAwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "iced coffee"
+    },
+    {
+      "id": "prod_tshirt_black",
+      "description": "A plain black t-shirt.",
+      "imageUrl": "https://images.unsplash.com/photo-1657364890921-dbd85cf0398b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxibGFjayUyMHQtc2hpcnR8ZW58MHx8fHwxNzYzMTUzOTE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "black t-shirt"
+    },
+    {
+      "id": "prod_jeans_blue",
+      "description": "A pair of classic blue jeans.",
+      "imageUrl": "https://images.unsplash.com/photo-1664095885291-80e42e5692ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxibHVlJTIwamVhbnN8ZW58MHx8fHwxNzYzMjQ1MzMzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "blue jeans"
+    },
+    {
+      "id": "prod_hoodie_gray",
+      "description": "A comfortable gray hoodie.",
+      "imageUrl": "https://images.unsplash.com/photo-1632862540359-fc17af5c143e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxncmF5JTIwaG9vZGllfGVufDB8fHx8MTc2MzIxNjE1MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gray hoodie"
+    },
+    {
+      "id": "prod_sneakers_white",
+      "description": "A pair of white sneakers.",
+      "imageUrl": "https://images.unsplash.com/photo-1722489291778-cb2a414d6ee0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3aGl0ZSUyMHNuZWFrZXJzfGVufDB8fHx8MTc2MzI3OTYyMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "white sneakers"
+    },
+    {
+      "id": "user_olivia_martin",
+      "description": "Avatar for Olivia Martin",
+      "imageUrl": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc2MzIxODk3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "user_jackson_lee",
+      "description": "Avatar for Jackson Lee",
+      "imageUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjMxOTUzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "user_isabella_nguyen",
+      "description": "Avatar for Isabella Nguyen",
+      "imageUrl": "https://images.unsplash.com/photo-1692736475357-7c18bfbb808b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx3b21hbiUyMHNtaWxpbmd8ZW58MHx8fHwxNzYzMTc1NDAwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman smiling"
+    },
+    {
+      "id": "user_william_kim",
+      "description": "Avatar for William Kim",
+      "imageUrl": "https://images.unsplash.com/photo-1714356333088-45a9ba618365?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxtYW4lMjBnbGFzc2VzfGVufDB8fHx8MTc2MzI2NzU0NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "man glasses"
+    },
+    {
+      "id": "user_sofia_davis",
+      "description": "Avatar for Sofia Davis",
+      "imageUrl": "https://images.unsplash.com/photo-1554727242-741c14fa561c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBzbWlsaW5nfGVufDB8fHx8MTc2MzIxOTY1OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person smiling"
+    },
+    {
+      "id": "store_hero",
+      "description": "A hero image for a store.",
+      "imageUrl": "https://images.unsplash.com/photo-1494346480775-936a9f0d0877?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjYWZlJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzYzMjc5NjIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cafe interior"
+    }
+  ]
+}
